@@ -26,7 +26,8 @@ const clubs = [
     nom: "BDE INFO",
     description: "Bureau Des Étudiants Informatique",
     icon: Code,
-    couleur: "from-green-400 to-emerald-500"
+    couleur: "from-green-400 to-emerald-500",
+    lien: "/alive/index.html"
   },
   {
     nom: "BPM",
@@ -53,23 +54,26 @@ const clubs = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mb-12">
       {clubs.map((club) => {
         const IconComponent = club.icon;
-        return (
-          <div class="group bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-transparent hover:shadow-xl transition-all">
-            <!-- Icône avec gradient -->
+        /* On définit le contenu de la carte */
+        const CardContent = (
+          <div class="group bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-transparent hover:shadow-xl transition-all h-full cursor-pointer">
             <div class={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${club.couleur} rounded-full mb-4 group-hover:scale-110 transition-transform`}>
               <IconComponent class="h-8 w-8 text-white" />
             </div>
-
-            <!-- Nom du club -->
             <h3 class="text-xl font-bold text-gray-900 mb-2">
               {club.nom}
             </h3>
-
-            <!-- Description -->
             <p class="text-gray-600 text-sm">
               {club.description}
             </p>
           </div>
+        );
+
+        /* SI le club a un lien, on l'entoure de <a>, SINON on affiche juste la div */
+        return club.lien ? (
+          <a href={club.lien}>{CardContent}</a>
+        ) : (
+          <div>{CardContent}</div>
         );
       })}
     </div>
