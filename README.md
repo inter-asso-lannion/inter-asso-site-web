@@ -1,255 +1,287 @@
-# 🌟 Site web de l'INTER-ASSO Lannion
+# Site web de l'INTER-ASSO Lannion — V2
 
-Ce projet est spécifiquement dédié au développement et à la gestion du site de l'inter-asso. Il s'adresse exclusivement aux étudiants de l'IUT de Lannion, qui sont les seuls à participer à sa conception, à sa mise en œuvre et à son suivi.
+Site officiel de l'Inter-Asso de l'IUT de Lannion. Ce projet est réservé aux étudiants de l'IUT de Lannion qui souhaitent contribuer.
 
-## 🚀 Technologies utilisées
+Cette version (V2) est une réécriture complète du site d'origine (Astro) en **Next.js / React**, choisie pour faciliter les contributions étudiantes : React est plus enseigné en formation, la syntaxe JSX est plus proche du HTML classique, et l'écosystème est plus accessible pour les débutants.
 
-Ce site est construit avec [Astro](https://astro.build/), un framework moderne qui génère des sites ultra-rapides en HTML, CSS et JavaScript. Astro permet également d'intégrer facilement des composants d'autres frameworks (React, Vue, Svelte, etc.) si besoin.
+## Stack technique
 
-### Stack technique :
-- **[Astro](https://astro.build/)** - Framework principal
-- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS pour le style
-- **[Lucide Icons](https://lucide.dev/)** - Bibliothèque d'icônes
+- **[Next.js 15](https://nextjs.org/)** (App Router, `output: "export"` — génération statique)
+- **[React 19](https://react.dev/)** — Server Components par défaut, `'use client'` uniquement pour les composants interactifs
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — config CSS-first via `@import "tailwindcss"` dans `globals.css`
+- **[Lucide React](https://lucide.dev/)** — icônes UI
+- **[Formspree](https://formspree.io/)** — gestion des soumissions du formulaire de contact
+- **TypeScript** — typage statique
 
-Pour en savoir plus sur Astro : https://astro.build/
+## Prérequis
 
-## 📋 Prérequis
+- **Node.js** v18 ou supérieur — [Télécharger](https://nodejs.org/)
+- **Git** — [Télécharger](https://git-scm.com/)
 
-Avant de commencer, assure-toi d'avoir installé :
-- **Node.js** (version 18 ou supérieure) - [Télécharger ici](https://nodejs.org/)
-- **npm** ou **pnpm** (inclus avec Node.js)
-- **Git** - [Télécharger ici](https://git-scm.com/)
-
-## 🛠️ Installation du projet
-
-### 1. Clone le repository
+## Installation
 
 ```bash
-git clone https://github.com/pierraw1/inter-asso-site-web.git
-cd site-web
-```
+# Clone le repo
+git clone https://github.com/inter-asso-lannion/inter-asso-site-web.git
+cd inter-asso-site-web/V2
 
-### 2. Installe les dépendances
-
-```bash
+# Installe les dépendances
 npm install
+
+# Copie le fichier d'environnement (voir section Formulaire de contact)
+cp .env.local.example .env.local
 ```
 
-## 💻 Commandes disponibles
+## Commandes disponibles
 
-| Commande | Action |
-|----------|--------|
-| `npm run dev` | Lance le serveur de développement sur `localhost:4321` |
-| `npm run build` | Crée le build de production dans le dossier `dist/` |
-| `npm run preview` | Prévisualise le build de production localement |
-| `npm run astro` | Lance les commandes CLI d'Astro |
+| Commande | Description |
+|---|---|
+| `npm run dev` | Serveur de développement sur `http://localhost:3000` |
+| `npm run build` | Build de production (génère le dossier `out/`) |
+| `npm run start` | Prévisualise le build de production |
 
-### Développement local
-
-Pour travailler sur le projet en local :
-
-```bash
-npm run dev
-```
-
-Le site sera accessible sur http://localhost:4321
-
-Les modifications seront automatiquement rechargées dans le navigateur (hot reload).
-
-### Build de production
-
-Pour créer une version optimisée du site :
-
-```bash
-npm run build
-```
-
-Le site sera généré dans le dossier `dist/` et prêt à être déployé.
-
-### Tester le build
-
-Pour vérifier que le build fonctionne correctement avant de déployer :
-
-```bash
-npm run preview
-```
-
-## 🤝 Contribuer au projet
-
-Seuls les étudiants de l'IUT de Lannion peuvent contribuer à ce projet. Voici comment procéder :
-
-### 1. Fork le projet
-
-Clique sur le bouton "Fork" en haut à droite de la page GitHub pour créer ta propre copie du projet.
-
-### 2. Clone ton fork
-
-```bash
-git clone https://github.com/pierraw1/inter-asso-site-web.git
-cd site-web
-```
-
-### 3. Crée une branche pour tes modifications
-
-```bash
-git checkout -b feature/ma-nouvelle-fonctionnalite
-```
-
-**Conventions de nommage des branches :**
-- `feature/` : pour une nouvelle fonctionnalité
-- `fix/` : pour une correction de bug
-- `docs/` : pour de la documentation
-- `style/` : pour des modifications de style
-
-Exemple : `feature/ajout-page-evenements`
-
-### 4. Fais tes modifications
-
-Travaille sur tes changements en local avec `npm run dev`.
-
-### 5. Commit tes modifications
-
-```bash
-git add .
-git commit -m "feat: description claire de ta modification"
-```
-
-**Conventions de commit :**
-- `feat:` : nouvelle fonctionnalité
-- `fix:` : correction de bug
-- `docs:` : modification de documentation
-- `style:` : changement de style/design
-- `refactor:` : refactorisation de code
-
-### 6. Push vers ton fork
-
-```bash
-git push origin feature/ma-nouvelle-fonctionnalite
-```
-
-### 7. Crée une Pull Request
-
-1. Va sur GitHub sur **ton fork**
-2. Clique sur "Compare & pull request"
-3. Décris clairement tes modifications
-4. Soumets la Pull Request
-
-Ton code sera ensuite examiné par l'équipe avant d'être fusionné au projet principal.
-
-## 📁 Structure du projet
+## Structure du projet
 
 ```
-/
-├── public/              # Assets statiques (images, fonts, etc.)
-│   └── images/         
-│       ├── clubs/      # Logos des clubs
-│       └── partenaires/ # Logos des partenaires
+V2/
+├── public/                   # Assets statiques (symlink vers ../public)
+│   └── images/
+│       ├── clubs/            # Logos des clubs
+│       ├── partenaires/      # Logos des partenaires
+│       └── evenements/       # Photos des événements
 ├── src/
-│   ├── components/     # Composants réutilisables
-│   │   ├── Header.astro
-│   │   └── Footer.astro
-│   ├── layouts/        # Layouts de page
-│   │   └── Layout.astro
-│   └── pages/          # Pages du site (routage automatique)
-│       ├── index.astro         # Page d'accueil
-│       ├── clubs.astro         # Page clubs
-│       ├── partenaires.astro   # Page partenaires
-│       ├── contact.astro       # Page contact
-│       ├── evenements/         # Dossier événements
-│       │   └── index.astro
-│       └── mentions-legales.astro
-├── astro.config.mjs    # Configuration Astro
-├── tailwind.config.mjs # Configuration Tailwind CSS
-├── package.json        # Dépendances du projet
-└── README.md          # Ce fichier
+│   ├── app/                  # Pages (routage basé sur les dossiers)
+│   │   ├── layout.tsx        # Layout global + métadonnées SEO
+│   │   ├── page.tsx          # Page d'accueil /
+│   │   ├── clubs/page.tsx    # Page /clubs
+│   │   ├── partenaires/page.tsx
+│   │   ├── evenements/page.tsx
+│   │   ├── contact/
+│   │   │   ├── page.tsx      # Page /contact
+│   │   │   └── ContactForm.tsx  # Formulaire (client component)
+│   │   ├── mentions-legales/page.tsx
+│   │   ├── sitemap.ts        # /sitemap.xml (généré automatiquement)
+│   │   └── robots.ts         # /robots.txt (généré automatiquement)
+│   ├── components/           # Composants réutilisables
+│   │   ├── Header.tsx        # Navigation (client component — menu mobile)
+│   │   ├── Footer.tsx
+│   │   ├── PageHero.tsx      # Bandeau hero commun à toutes les pages
+│   │   ├── BackButton.tsx    # Bouton retour arrière
+│   │   └── icons.tsx         # Icônes SVG pour Facebook, Instagram, GitHub
+│   └── data/                 # Données du site — c'est ici que tu travailleras le plus
+│       ├── clubs.ts          # Liste des clubs
+│       ├── partenaires.ts    # Liste des partenaires
+│       ├── evenements.ts     # Liste des événements
+│       └── navigation.ts     # Liens de navigation (Header + Footer)
+├── .env.local.example        # Variables d'environnement à copier
+├── next.config.ts            # Configuration Next.js
+├── postcss.config.mjs        # PostCSS (requis pour Tailwind v4)
+└── tsconfig.json
 ```
 
-## 🎨 Guide de style
+## Modifier le contenu du site
 
-### Couleurs principales
+Toutes les données affichées sur le site sont centralisées dans `src/data/`. Tu n'as pas besoin de toucher aux pages pour mettre à jour le contenu.
 
-Le site utilise une palette de couleurs inspirée du logo de l'Inter-Asso :
-- **Violet** : `#7c3aed` (purple-600)
-- **Rose** : `#ec4899` (pink-500)
-- **Orange** : `#f97316` (orange-500)
-- **Bleu** : `#06b6d4` (cyan-500)
+### Ajouter ou modifier un événement
 
-### Composants
+Édite `src/data/evenements.ts` :
 
-Pour créer un nouveau composant :
-
-```astro
----
-// src/components/MonComposant.astro
----
-
-<div class="mon-composant">
-  <h2>Mon composant</h2>
-</div>
-
-<style>
-  .mon-composant {
-    /* Styles spécifiques */
-  }
-</style>
+```ts
+export const evenements: Evenement[] = [
+  {
+    titre: "Nom de l'événement",
+    date: "Avril 2026",
+    image: "/images/evenements/nom-du-fichier.webp",
+    description: "Une courte description.",
+  },
+  // ...
+];
 ```
 
-### Pages
+Ajoute l'image dans `public/images/evenements/`. Les formats `.webp` et `.jpg` sont acceptés.
 
-Pour créer une nouvelle page, ajoute simplement un fichier `.astro` dans `src/pages/` :
+### Ajouter ou modifier un club
 
-```astro
----
-// src/pages/ma-page.astro
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
----
+Édite `src/data/clubs.ts` :
 
-<Layout title="Ma Page">
-  <Header />
-  
-  <main>
-    <h1>Contenu de ma page</h1>
-  </main>
-  
-  <Footer />
-</Layout>
+```ts
+import { Music } from "lucide-react"; // importe l'icône souhaitée depuis lucide-react
+
+export const clubs: Club[] = [
+  {
+    id: "bde-mmi",                                  // identifiant unique (slug)
+    nom: "BDE MMI",
+    departement: "Multimédia et Internet",
+    description: "Description du club...",
+    couleur: "from-purple-500 to-pink-500",         // dégradé Tailwind (bg-linear-to-br)
+    icon: Music,                                    // composant icône Lucide
+    reseaux: {
+      instagram: "https://instagram.com/...",
+      email: "bde-mmi@exemple.fr",                 // optionnel
+    },
+  },
+  // ...
+];
 ```
 
-La page sera automatiquement accessible sur `/ma-page`.
+### Ajouter ou modifier un partenaire
 
-## 🐛 Signaler un bug
+Édite `src/data/partenaires.ts` :
 
-Si tu trouves un bug, ouvre une [issue sur GitHub](https://github.com/pierraw1/inter-asso-site-web) avec :
-- Une description claire du problème
-- Les étapes pour reproduire le bug
-- Des captures d'écran si possible
-- Ton environnement (navigateur, OS, etc.)
+```ts
+export const partenaires: Partenaire[] = [
+  {
+    id: "nom-du-partenaire",
+    nom: "Nom du partenaire",
+    categorie: "Restauration",
+    reduction: "-10% sur présentation",
+    description: "Description...",
+    logo: "/images/partenaires/logo.png",
+    adresse: "1 Rue Exemple, 22300 Lannion",
+    horaires: "Lun–Sam 12h–14h",               // optionnel
+    notes: "Hors menus du jour",                // optionnel — affiché en rouge
+    instagram: "@compte_instagram",             // optionnel
+    lien: "https://site-du-partenaire.fr",      // optionnel
+  },
+  // ...
+];
+```
 
-## 📝 Ressources utiles
+## Formulaire de contact
 
-- [Documentation Astro](https://docs.astro.build/)
-- [Documentation Tailwind CSS](https://tailwindcss.com/docs)
-- [Guide de contribution GitHub](https://docs.github.com/fr/get-started/quickstart/contributing-to-projects)
+Le formulaire utilise [Formspree](https://formspree.io/) pour envoyer les messages sans backend. L'ID du formulaire est configuré via une variable d'environnement :
+
+```bash
+# .env.local
+NEXT_PUBLIC_FORMSPREE_ID=xpwvgpwe
+```
+
+Pour utiliser ton propre formulaire Formspree (par exemple lors d'un fork), crée un compte sur formspree.io, crée un nouveau formulaire, et remplace l'ID dans `.env.local`.
+
+## Créer une nouvelle page
+
+Crée un dossier dans `src/app/` avec un fichier `page.tsx` :
+
+```tsx
+// src/app/ma-page/page.tsx
+import type { Metadata } from "next";
+import PageHero from "@/components/PageHero";
+
+export const metadata: Metadata = {
+  title: "Ma page",
+  description: "Description pour le SEO.",
+};
+
+export default function MaPage() {
+  return (
+    <main>
+      <PageHero title="Ma page" subtitle="Sous-titre optionnel" />
+
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          {/* contenu */}
+        </div>
+      </section>
+    </main>
+  );
+}
+```
+
+La page sera automatiquement accessible sur `/ma-page`. Ajoute le lien dans `src/data/navigation.ts` pour qu'il apparaisse dans le menu.
+
+### Server Components vs Client Components
+
+Par défaut, tous les composants Next.js sont des **Server Components** : ils sont rendus côté serveur et n'ont pas accès aux APIs du navigateur (`useState`, `useEffect`, événements, etc.).
+
+Ajoute `'use client'` en tête de fichier uniquement si ton composant a besoin d'interactivité :
+
+```tsx
+'use client';
+
+import { useState } from "react";
+
+export default function MonComposantInteractif() {
+  const [count, setCount] = useState(0);
+  // ...
+}
+```
+
+Les seuls composants `'use client'` du projet sont `Header.tsx` (menu mobile) et `ContactForm.tsx` (formulaire).
+
+## SEO
+
+Le SEO est géré via le [Metadata API de Next.js](https://nextjs.org/docs/app/building-your-application/optimizing/metadata).
+
+- Les métadonnées globales (Open Graph, Twitter Card, JSON-LD) sont dans `src/app/layout.tsx`
+- Chaque page définit son propre `title` et `description` via `export const metadata`
+- Le sitemap est généré automatiquement depuis `src/app/sitemap.ts`
+- Le `robots.txt` est généré depuis `src/app/robots.ts`
+
+Pour ajouter une page au sitemap, ajoute une entrée dans `src/app/sitemap.ts`.
+
+## Charte graphique
+
+Le site utilise un dégradé violet → rose → orange comme couleur principale.
+
+| Rôle | Valeur Tailwind | Hex |
+|---|---|---|
+| Violet | `purple-600` | `#7c3aed` |
+| Rose | `pink-500` | `#ec4899` |
+| Orange | `orange-400` | `#fb923c` |
+
+Le héro de chaque page utilise le composant `PageHero` avec le dégradé `from-purple-600 via-pink-500 to-orange-400`.
+
+## Contribuer
+
+Seuls les étudiants de l'IUT de Lannion peuvent contribuer à ce projet.
+
+### Workflow
+
+```bash
+# 1. Fork le repo sur GitHub, puis clone ton fork
+git clone https://github.com/TON_PSEUDO/inter-asso-site-web.git
+cd inter-asso-site-web/V2
+
+# 2. Crée une branche pour ta modification
+git checkout -b feat/ajout-evenement-ski-2026
+
+# 3. Lance le serveur de dev et fais tes modifications
+npm run dev
+
+# 4. Vérifie que le build passe sans erreur avant de committer
+npm run build
+
+# 5. Commit et push
+git add src/data/evenements.ts
+git commit -m "feat: ajoute l'événement ski 2026"
+git push origin feat/ajout-evenement-ski-2026
+
+# 6. Ouvre une Pull Request sur GitHub
+```
+
+### Conventions de commit
+
+| Préfixe | Usage |
+|---|---|
+| `feat:` | Nouvelle fonctionnalité ou nouveau contenu |
+| `fix:` | Correction de bug |
+| `style:` | Changements visuels / design |
+| `refactor:` | Refactorisation sans changement fonctionnel |
+| `docs:` | Documentation uniquement |
+
+## Ressources
+
+- [Documentation Next.js](https://nextjs.org/docs)
+- [Documentation Tailwind CSS v4](https://tailwindcss.com/docs)
 - [Lucide Icons](https://lucide.dev/icons/)
+- [Formspree](https://formspree.io/docs/)
 
-## 📧 Contact
+## Contact
 
-Pour toute question concernant le projet, contacte-nous :
 - Email : hello@inter-asso.fr
 - Discord : [discord.gg/BG62QR77pP](https://discord.gg/BG62QR77pP)
 - Instagram : [@inter_asso](https://instagram.com/inter_asso)
-
-## 📄 Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
-En résumé, tu es libre de :
-- ✅ Utiliser le code pour n'importe quel projet
-- ✅ Modifier le code
-- ✅ Distribuer le code
-- ✅ Utiliser le code commercialement
 
 ---
 

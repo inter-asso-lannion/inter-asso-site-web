@@ -1,21 +1,26 @@
 {
-  "name": "inter-asso-lannion",
+  "name": "inter-asso-lannion-v2",
   "type": "module",
   "version": "0.0.1",
   "description": "Site web de l'Inter-Asso IUT de Lannion",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "@lucide/astro": "^0.561.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.5",
-    "tailwindcss": "^4.1.18"
+    "next": "^15.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "lucide-react": "^0.511.0",
+    "tailwindcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
   }
 }
