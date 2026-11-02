@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FileText, Building2, Server, Shield } from "lucide-react";
+import { DocumentTextIcon, BuildingOffice2Icon, ServerIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 
 export const metadata: Metadata = {
   title: "Mentions Légales",
@@ -27,7 +27,7 @@ export default function MentionsLegalesPage() {
             <section className="bg-white rounded-xl p-8 shadow-md">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <Building2 className="h-6 w-6 text-purple-600" />
+                  <BuildingOffice2Icon className="h-6 w-6 text-purple-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Éditeur du site
@@ -93,7 +93,7 @@ export default function MentionsLegalesPage() {
             <section className="bg-white rounded-xl p-8 shadow-md">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Server className="h-6 w-6 text-blue-600" />
+                  <ServerIcon className="h-6 w-6 text-blue-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Hébergement
@@ -133,7 +133,7 @@ export default function MentionsLegalesPage() {
             <section className="bg-white rounded-xl p-8 shadow-md">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-green-600" />
+                  <DocumentTextIcon className="h-6 w-6 text-green-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Propriété intellectuelle
@@ -172,7 +172,7 @@ export default function MentionsLegalesPage() {
             <section className="bg-white rounded-xl p-8 shadow-md">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-indigo-600" />
+                  <ShieldCheckIcon className="h-6 w-6 text-indigo-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Protection des données personnelles

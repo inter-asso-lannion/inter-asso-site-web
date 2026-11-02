@@ -1,1 +1,12 @@
-{}
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/clubs/page": "app/clubs/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/evenements/page": "app/evenements/page.js",
+  "/mentions-legales/page": "app/mentions-legales/page.js",
+  "/page": "app/page.js",
+  "/partenaires/page": "app/partenaires/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js"
+}

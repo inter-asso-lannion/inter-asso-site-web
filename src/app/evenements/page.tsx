@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Calendar } from "lucide-react";
+import { CalendarIcon } from "@heroicons/react/24/outline";
 import { IconInstagram } from "@/components/icons";
 import { evenements } from "@/data/evenements";
 import PageHero from "@/components/PageHero";
@@ -36,7 +36,7 @@ export default function EvenementsPage() {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 text-purple-600 text-sm font-semibold mb-2">
-                      <Calendar className="h-4 w-4" />
+                      <CalendarIcon className="h-4 w-4" />
                       <span>{evenement.date}</span>
                     </div>
                     <h2 className="text-xl font-bold text-gray-900 mb-2">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NAV_LINKS } from "@/data/navigation";
 
 export default function Header() {
@@ -50,9 +50,9 @@ export default function Header() {
             aria-controls="mobile-menu"
           >
             {isOpen ? (
-              <X className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Bars3Icon className="h-6 w-6" />
             )}
           </button>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Send } from "lucide-react";
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -145,7 +145,7 @@ export default function ContactForm() {
           disabled={status === "sending"}
           className="w-full bg-linear-to-r from-purple-600 to-pink-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-600 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          <Send className="h-5 w-5" />
+          <PaperAirplaneIcon className="h-5 w-5" />
           <span>
             {status === "sending" ? "Envoi en cours..." : "Envoyer le message"}
           </span>

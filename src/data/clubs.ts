@@ -1,12 +1,14 @@
-import { Palette, Atom, Code, Wifi, Music, Gamepad2 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { PaintBrushIcon, BeakerIcon, CodeBracketIcon, WifiIcon, MusicalNoteIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline";
+import type { ComponentType, SVGProps } from "react";
+
+export type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
 export type ClubDetail = {
   id: string;
   nom: string;
   departement: string;
   description: string;
-  icon: LucideIcon;
+  icon: HeroIcon;
   couleur: string;
   reseaux: {
     instagram?: string;
@@ -17,7 +19,7 @@ export type ClubDetail = {
 export type ClubAccueil = {
   nom: string;
   description: string;
-  icon: LucideIcon;
+  icon: HeroIcon;
   couleur: string;
 };
 
@@ -28,7 +30,7 @@ export const clubs: ClubDetail[] = [
     departement: "Métiers du Multimédia et de l'Internet",
     description:
       "Le BDE MMI organise des événements pour les étudiants en MMI : soirées, sorties, projets créatifs et bien plus encore. Rejoins-nous pour vivre une expérience étudiante inoubliable !",
-    icon: Palette,
+    icon: PaintBrushIcon,
     couleur: "from-purple-500 to-pink-500",
     reseaux: {
       instagram: "https://instagram.com/bde.mmi.lannion",
@@ -41,7 +43,7 @@ export const clubs: ClubDetail[] = [
     departement: "Mesures Physiques",
     description:
       "Le BDE MP représente les étudiants du département Mesures Physiques. Expériences scientifiques, soirées et cohésion d'équipe sont au programme !",
-    icon: Atom,
+    icon: BeakerIcon,
     couleur: "from-blue-500 to-cyan-500",
     reseaux: {
       instagram: "https://instagram.com/bde.mpintes",
@@ -54,7 +56,7 @@ export const clubs: ClubDetail[] = [
     departement: "Informatique",
     description:
       "Le BDE INFO rassemble les passionnés de code et de nouvelles technologies. Hackathons, LAN parties et événements tech pour tous les étudiants en informatique !",
-    icon: Code,
+    icon: CodeBracketIcon,
     couleur: "from-green-500 to-emerald-500",
     reseaux: {
       instagram: "https://instagram.com/alive_iut",
@@ -67,7 +69,7 @@ export const clubs: ClubDetail[] = [
     departement: "Réseaux & Télécommunications",
     description:
       "Le BDE R&T connecte les étudiants du département Réseaux et Télécommunications. Événements networking, ateliers techniques et moments conviviaux !",
-    icon: Wifi,
+    icon: WifiIcon,
     couleur: "from-orange-500 to-yellow-500",
     reseaux: {
       instagram: "https://instagram.com/bde_rt_lannion",
@@ -80,7 +82,7 @@ export const clubs: ClubDetail[] = [
     departement: "Club Musique",
     description:
       "Le BPM (Beats Per Minute) est le club musique de l'IUT ! Concerts, jam sessions, découverte d'artistes et soirées musicales. Que tu sois musicien ou simple mélomane, viens partager ta passion !",
-    icon: Music,
+    icon: MusicalNoteIcon,
     couleur: "from-red-500 to-pink-500",
     reseaux: {
       instagram: "https://instagram.com/bpm_asso",
@@ -93,7 +95,7 @@ export const clubs: ClubDetail[] = [
     departement: "Club développement jeux vidéo",
     description:
       "LocalDreamer est le club de développement de jeux vidéo de l'IUT ! Rejoins la communauté gaming de Lannion !",
-    icon: Gamepad2,
+    icon: PuzzlePieceIcon,
     couleur: "from-teal-500 to-emerald-500",
     reseaux: {
       instagram: "https://instagram.com/localdreamer.lan",
@@ -106,31 +108,31 @@ export const clubsAccueil: ClubAccueil[] = [
   {
     nom: "BDE MMI",
     description: "Bureau Des Étudiants Multimédia et Internet",
-    icon: Palette,
+    icon: PaintBrushIcon,
     couleur: "from-purple-400 to-pink-500",
   },
   {
     nom: "BDE MP",
     description: "Bureau Des Étudiants Mesures Physiques",
-    icon: Atom,
+    icon: BeakerIcon,
     couleur: "from-blue-400 to-cyan-500",
   },
   {
     nom: "BDE R&T",
     description: "Bureau Des Étudiants Réseaux & Télécommunications",
-    icon: Wifi,
+    icon: WifiIcon,
     couleur: "from-orange-400 to-yellow-500",
   },
   {
     nom: "BDE INFO",
     description: "Bureau Des Étudiants Informatique",
-    icon: Code,
+    icon: CodeBracketIcon,
     couleur: "from-green-400 to-emerald-500",
   },
   {
     nom: "BPM",
     description: "Club musique",
-    icon: Music,
+    icon: MusicalNoteIcon,
     couleur: "from-red-400 to-pink-500",
   },
 ];

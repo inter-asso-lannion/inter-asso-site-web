@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, MessageSquare } from "lucide-react";
+import { EnvelopeIcon, MapPinIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { IconInstagram } from "@/components/icons";
 import ContactForm from "./ContactForm";
@@ -33,7 +33,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <div className="shrink-0">
                       <div className="w-14 h-14 bg-linear-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                        <Mail className="h-7 w-7 text-white" />
+                        <EnvelopeIcon className="h-7 w-7 text-white" />
                       </div>
                     </div>
                     <div>
@@ -57,7 +57,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <div className="shrink-0">
                       <div className="w-14 h-14 bg-linear-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center">
-                        <MessageSquare className="h-7 w-7 text-white" />
+                        <ChatBubbleLeftRightIcon className="h-7 w-7 text-white" />
                       </div>
                     </div>
                     <div>
@@ -83,7 +83,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <div className="shrink-0">
                       <div className="w-14 h-14 bg-linear-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center">
-                        <MapPin className="h-7 w-7 text-white" />
+                        <MapPinIcon className="h-7 w-7 text-white" />
                       </div>
                     </div>
                     <div>

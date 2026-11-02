@@ -9,7 +9,7 @@ Cette version (V2) est une réécriture complète du site d'origine (Astro) en *
 - **[Next.js 16](https://nextjs.org/)** (App Router, Turbopack, `output: "export"` — génération statique)
 - **[React 19.3](https://react.dev/)** — Server Components par défaut, `'use client'` uniquement pour les composants interactifs
 - **[Tailwind CSS v4.3](https://tailwindcss.com/)** — config CSS-first via `@import "tailwindcss"` dans `globals.css`
-- **[Lucide React 1.x](https://lucide.dev/)** — icônes UI
+- **[Heroicons 2](https://heroicons.com/)** — icônes UI (`@heroicons/react/24/outline`)
 - **[Formspree](https://formspree.io/)** — gestion des soumissions du formulaire de contact
 - **[TypeScript 7](https://www.typescriptlang.org/)** — typage statique
 
@@ -106,7 +106,7 @@ Ajoute l'image dans `public/images/evenements/`. Les formats `.webp` et `.jpg` s
 Édite `src/data/clubs.ts` :
 
 ```ts
-import { Music } from "lucide-react"; // importe l'icône souhaitée depuis lucide-react
+import { MusicalNoteIcon } from "@heroicons/react/24/outline"; // importe l'icône souhaitée depuis Heroicons
 
 export const clubs: Club[] = [
   {
@@ -115,7 +115,7 @@ export const clubs: Club[] = [
     departement: "Multimédia et Internet",
     description: "Description du club...",
     couleur: "from-purple-500 to-pink-500",         // dégradé Tailwind (bg-linear-to-br)
-    icon: Music,                                    // composant icône Lucide
+    icon: MusicalNoteIcon,                          // composant icône Heroicons
     reseaux: {
       instagram: "https://instagram.com/...",
       email: "bde-mmi@exemple.fr",                 // optionnel
@@ -274,7 +274,7 @@ git push origin feat/ajout-evenement-ski-2026
 
 - [Documentation Next.js](https://nextjs.org/docs)
 - [Documentation Tailwind CSS v4](https://tailwindcss.com/docs)
-- [Lucide Icons](https://lucide.dev/icons/)
+- [Heroicons](https://heroicons.com/)
 - [Formspree](https://formspree.io/docs/)
 
 ## Contact

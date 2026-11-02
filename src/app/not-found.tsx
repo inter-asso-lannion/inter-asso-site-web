@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { HomeIcon } from "@heroicons/react/24/outline";
 import BackButton from "@/components/BackButton";
 
 export default function NotFound() {
@@ -21,7 +21,7 @@ export default function NotFound() {
               href="/"
               className="inline-flex items-center justify-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all"
             >
-              <Home className="h-5 w-5" />
+              <HomeIcon className="h-5 w-5" />
               Accueil
             </Link>
           </div>

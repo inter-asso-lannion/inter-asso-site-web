@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, ExternalLink } from "lucide-react";
+import { EnvelopeIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { IconInstagram } from "@/components/icons";
 import { clubs } from "@/data/clubs";
 import PageHero from "@/components/PageHero";
@@ -71,7 +71,7 @@ export default function ClubsPage() {
                             className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors font-medium"
                             aria-label={`Email ${club.nom}`}
                           >
-                            <Mail className="h-4 w-4" />
+                            <EnvelopeIcon className="h-4 w-4" />
                             <span>Email</span>
                           </a>
                         )}
@@ -95,7 +95,7 @@ export default function ClubsPage() {
                 className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
               >
                 Nous contacter
-                <ExternalLink className="h-5 w-5" />
+                <ArrowTopRightOnSquareIcon className="h-5 w-5" />
               </Link>
             </div>
           </div>

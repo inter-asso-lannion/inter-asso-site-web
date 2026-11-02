@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { FOOTER_LINKS } from "@/data/navigation";
 import { IconFacebook, IconInstagram, IconGithub } from "@/components/icons";
 
@@ -15,7 +15,7 @@ export default function Footer() {
               étudiante de l&apos;IUT de Lannion.
             </p>
             <div className="flex items-start gap-2 text-gray-400">
-              <MapPin className="h-5 w-5 shrink-0 mt-1" />
+              <MapPinIcon className="h-5 w-5 shrink-0 mt-1" />
               <span>
                 IUT de Lannion
                 <br />
@@ -45,7 +45,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Nous contacter</h3>
             <div className="flex items-center gap-2 text-gray-400 mb-4">
-              <Mail className="h-5 w-5" />
+              <EnvelopeIcon className="h-5 w-5" />
               <a
                 href="mailto:hello@inter-asso.fr"
                 className="hover:text-white transition-colors"

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { partenairesAccueil } from "@/data/partenaires";
 
 export default function PartenairesSection() {
@@ -36,7 +36,7 @@ export default function PartenairesSection() {
             className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg"
           >
             Voir tous nos partenaires
-            <ArrowRight className="h-5 w-5" />
+            <ArrowRightIcon className="h-5 w-5" />
           </Link>
         </div>
       </div>

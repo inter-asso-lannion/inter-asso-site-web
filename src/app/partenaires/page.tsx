@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CreditCard, MapPin, Clock, AlertCircle } from "lucide-react";
+import { CreditCardIcon, MapPinIcon, ClockIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { partenaires } from "@/data/partenaires";
 import PageHero from "@/components/PageHero";
 
@@ -14,7 +14,7 @@ export default function PartenairesPage() {
     <main>
       <PageHero title="Nos Partenaires" paddingY="py-16">
         <div className="mt-6 inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30 shadow-lg">
-          <CreditCard className="h-6 w-6" />
+          <CreditCardIcon className="h-6 w-6" />
           <span className="font-semibold">
             Carte étudiante obligatoire pour bénéficier des avantages
           </span>
@@ -57,14 +57,14 @@ export default function PartenairesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-auto pt-6 border-t border-gray-100 text-gray-700">
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
+                      <MapPinIcon className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
                       <span className="font-medium text-sm">
                         {partenaire.adresse}
                       </span>
                     </div>
                     {partenaire.horaires && (
                       <div className="flex items-start gap-3">
-                        <Clock className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                        <ClockIcon className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
                         <span className="text-sm">{partenaire.horaires}</span>
                       </div>
                     )}
@@ -73,7 +73,7 @@ export default function PartenairesPage() {
                   <div className="space-y-3">
                     {partenaire.notes && (
                       <div className="flex items-start gap-3 text-red-600 font-bold bg-red-50 p-3 rounded-xl border border-red-100">
-                        <AlertCircle className="h-5 w-5 shrink-0" />
+                        <ExclamationCircleIcon className="h-5 w-5 shrink-0" />
                         <span className="text-xs uppercase tracking-wide">
                           {partenaire.notes}
                         </span>

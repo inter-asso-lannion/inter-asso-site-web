@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Phone, ArrowRight } from "lucide-react";
+import { EnvelopeIcon, PhoneIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function ContactBandeau() {
   return (
@@ -20,7 +20,7 @@ export default function ContactBandeau() {
               className="flex items-center gap-2 text-white hover:text-white/80 transition-colors"
             >
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <Mail className="h-5 w-5" />
+                <EnvelopeIcon className="h-5 w-5" />
               </div>
               <span className="font-medium">hello@inter-asso.fr</span>
             </a>
@@ -30,7 +30,7 @@ export default function ContactBandeau() {
               className="flex items-center gap-2 text-white hover:text-white/80 transition-colors"
             >
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <Phone className="h-5 w-5" />
+                <PhoneIcon className="h-5 w-5" />
               </div>
               <span className="font-medium">02 96 46 93 00</span>
             </a>
@@ -41,7 +41,7 @@ export default function ContactBandeau() {
             className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg"
           >
             Accéder au formulaire de contact
-            <ArrowRight className="h-5 w-5" />
+            <ArrowRightIcon className="h-5 w-5" />
           </Link>
         </div>
       </div>

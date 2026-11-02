@@ -1,6 +1,6 @@
 /**
- * Icônes de marque inline — lucide-react a déprécié ces icônes en v0.x (suppression prévue en v1.0).
- * On embarque directement les paths SVG de lucide pour s'affranchir de cette dépendance.
+ * Icônes de marque inline (Facebook, Instagram, GitHub) — Heroicons ne fournit pas de logos de marque.
+ * Les paths SVG sont embarqués directement pour éviter une dépendance supplémentaire.
  */
 
 type IconProps = { className?: string };
