@@ -43,39 +43,47 @@ cp .env.local.example .env.local
 ## Structure du projet
 
 ```
-V2/
-├── public/                   # Assets statiques (symlink vers ../public)
-│   └── images/
-│       ├── clubs/            # Logos des clubs
-│       ├── partenaires/      # Logos des partenaires
-│       └── evenements/       # Photos des événements
+├── public/images/
+│   ├── clubs/                # Logos des clubs + logo Inter-Asso
+│   ├── partenaires/          # Logos des partenaires
+│   ├── evenements/           # Affiches et photos des événements
+│   └── og-inter-asso.png     # Image de partage réseaux sociaux (1200×630)
 ├── src/
 │   ├── app/                  # Pages (routage basé sur les dossiers)
-│   │   ├── layout.tsx        # Layout global + métadonnées SEO
+│   │   ├── layout.tsx        # Layout global, police, métadonnées SEO, JSON-LD de l'association
+│   │   ├── globals.css       # Couleurs, typographie et animation des affiches
 │   │   ├── page.tsx          # Page d'accueil /
 │   │   ├── clubs/page.tsx    # Page /clubs
 │   │   ├── partenaires/page.tsx
-│   │   ├── evenements/page.tsx
+│   │   ├── evenements/page.tsx  # Mur d'affiches + JSON-LD Event
 │   │   ├── contact/
-│   │   │   ├── page.tsx      # Page /contact
+│   │   │   ├── page.tsx      # Page /contact (coordonnées + FAQ)
 │   │   │   └── ContactForm.tsx  # Formulaire (client component)
 │   │   ├── mentions-legales/page.tsx
+│   │   ├── not-found.tsx     # Page 404
 │   │   ├── sitemap.ts        # /sitemap.xml (généré automatiquement)
 │   │   └── robots.ts         # /robots.txt (généré automatiquement)
 │   ├── components/           # Composants réutilisables
 │   │   ├── Header.tsx        # Navigation (client component — menu mobile)
-│   │   ├── Footer.tsx
-│   │   ├── PageHero.tsx      # Bandeau hero commun à toutes les pages
-│   │   ├── BackButton.tsx    # Bouton retour arrière
-│   │   └── icons.tsx         # Icônes SVG pour Facebook, Instagram, GitHub
-│   └── data/                 # Données du site — c'est ici que tu travailleras le plus
-│       ├── clubs.ts          # Liste des clubs
-│       ├── partenaires.ts    # Liste des partenaires
-│       ├── evenements.ts     # Liste des événements
-│       └── navigation.ts     # Liens de navigation (Header + Footer)
-├── .env.local.example        # Variables d'environnement à copier
-├── next.config.ts            # Configuration Next.js
-├── postcss.config.mjs        # PostCSS (requis pour Tailwind v4)
+│   │   ├── Footer.tsx        # Appel à nous écrire + pied de page
+│   │   ├── Hero.tsx          # Haut de l'accueil (affiches en éventail)
+│   │   ├── ClubsSection.tsx, PartenairesSection.tsx, EvenementsSection.tsx  # Sections de l'accueil
+│   │   ├── PageHeader.tsx    # En-tête des pages internes + fil d'Ariane
+│   │   ├── ClubBadge.tsx     # Logo rond d'un club, cerclé de sa couleur
+│   │   ├── JsonLd.tsx        # Données structurées schema.org
+│   │   ├── BackButton.tsx    # Bouton « Page précédente » (page 404)
+│   │   └── icons.tsx         # Icônes SVG Facebook, Instagram, GitHub
+│   ├── data/                 # Données du site — c'est ici que tu travailleras le plus
+│   │   ├── clubs.ts
+│   │   ├── partenaires.ts
+│   │   ├── evenements.ts
+│   │   └── navigation.ts     # Liens de navigation (Header + Footer)
+│   └── lib/
+│       ├── site.ts           # Infos centrales (URL, email, adresse, réseaux) + métadonnées des pages
+│       └── dates.ts          # Formatage des dates d'événements
+├── .env.local.example
+├── next.config.ts
+├── postcss.config.mjs
 └── tsconfig.json
 ```
 
@@ -85,40 +93,50 @@ Toutes les données affichées sur le site sont centralisées dans `src/data/`. 
 
 ### Ajouter ou modifier un événement
 
-Édite `src/data/evenements.ts` :
+Édite `src/data/evenements.ts`. Les événements sont listés du plus récent au plus ancien :
 
 ```ts
 export const evenements: Evenement[] = [
   {
-    titre: "Nom de l'événement",
-    date: "Avril 2026",
-    image: "/images/evenements/nom-du-fichier.webp",
+    id: "up-ta-rentree-2026",                  // identifiant unique
+    titre: "Up ta Rentrée 2026",
+    date: "2026",                              // affiché si `debut` est absent
+    debut: "2026-09-24T20:00:00+02:00",        // optionnel — date ISO lue sur l'affiche
+    fin: "2026-09-25T01:00:00+02:00",          // optionnel
+    lieu: { nom: "Salle des Ursulines", codePostal: "22300", ville: "Lannion" }, // optionnel
+    prix: "3 € en prévente, 5 € sur place",     // optionnel
     description: "Une courte description.",
+    image: "/images/evenements/up-ta-rentree-2026.webp",
+    largeur: 800,                              // dimensions réelles de l'image en pixels
+    hauteur: 1131,
   },
   // ...
 ];
 ```
 
-Ajoute l'image dans `public/images/evenements/`. Les formats `.webp` et `.jpg` sont acceptés.
+Ajoute l'image dans `public/images/evenements/`. Pour connaître ses dimensions sur Mac : `sips -g pixelWidth -g pixelHeight ton-image.webp`. Allège les grosses affiches (plus de 1 500 px de large) avant de les ajouter.
+
+Quand `debut` et `lieu` sont renseignés, l'événement est aussi décrit pour Google (données structurées `Event`).
 
 ### Ajouter ou modifier un club
 
 Édite `src/data/clubs.ts` :
 
 ```ts
-import { MusicalNoteIcon } from "@heroicons/react/24/outline"; // importe l'icône souhaitée depuis Heroicons
-
 export const clubs: Club[] = [
   {
-    id: "bde-mmi",                                  // identifiant unique (slug)
+    id: "bde-mmi",                      // identifiant unique, sert d'ancre : /clubs#bde-mmi
     nom: "BDE MMI",
-    departement: "Multimédia et Internet",
+    sigle: "MMI",                       // affiché dans la pastille si le club n'a pas de logo
+    departement: "Métiers du Multimédia et de l'Internet",
     description: "Description du club...",
-    couleur: "from-purple-500 to-pink-500",         // dégradé Tailwind (bg-linear-to-br)
-    icon: MusicalNoteIcon,                          // composant icône Heroicons
+    couleur: "#a3238a",                 // couleur de la pastille du club
+    texteSurCouleur: "#ffffff",         // "#ffffff" sur couleur foncée, "#000000" sur couleur claire
+    logo: "/images/clubs/Logo-BDE-MMI.webp", // optionnel
+    logoFit: "contain",                 // optionnel — pour les logos rectangulaires
     reseaux: {
       instagram: "https://instagram.com/...",
-      email: "bde-mmi@exemple.fr",                 // optionnel
+      email: "bde-mmi@exemple.fr",
     },
   },
   // ...
@@ -132,21 +150,25 @@ export const clubs: Club[] = [
 ```ts
 export const partenaires: Partenaire[] = [
   {
-    id: "nom-du-partenaire",
+    id: 8,
     nom: "Nom du partenaire",
     categorie: "Restauration",
-    reduction: "-10% sur présentation",
+    reduction: "-10% sur présentation",        // affiché en gros, surligné en jaune
+    typeReduction: "carte",                    // "carte" (carte étudiante) ou "info"
     description: "Description...",
-    logo: "/images/partenaires/logo.png",
+    logo: "/images/partenaires/Logo-Partenaire.webp",
     adresse: "1 Rue Exemple, 22300 Lannion",
     horaires: "Lun–Sam 12h–14h",               // optionnel
     notes: "Hors menus du jour",                // optionnel — affiché en rouge
     instagram: "@compte_instagram",             // optionnel
     lien: "https://site-du-partenaire.fr",      // optionnel
+    accueil: true,                              // optionnel — affiché sur la page d'accueil
   },
   // ...
 ];
 ```
+
+⚠️ Les noms de fichiers sont sensibles aux majuscules sur le serveur : `Logo-Le-Truc.webp` et `logo-le-truc.webp` sont deux fichiers différents. Recopie le nom exact du fichier.
 
 ## Formulaire de contact
 
@@ -165,30 +187,29 @@ Crée un dossier dans `src/app/` avec un fichier `page.tsx` :
 
 ```tsx
 // src/app/ma-page/page.tsx
-import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import PageHeader from "@/components/PageHeader";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Ma page",
   description: "Description pour le SEO.",
-};
+  path: "/ma-page",
+});
 
 export default function MaPage() {
   return (
-    <main>
-      <PageHero title="Ma page" subtitle="Sous-titre optionnel" />
+    <>
+      <PageHeader title="Ma page" path="/ma-page" lead="Chapô optionnel" />
 
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          {/* contenu */}
-        </div>
-      </section>
-    </main>
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        {/* contenu */}
+      </div>
+    </>
   );
 }
 ```
 
-La page sera automatiquement accessible sur `/ma-page`. Ajoute le lien dans `src/data/navigation.ts` pour qu'il apparaisse dans le menu.
+La page sera automatiquement accessible sur `/ma-page`. Ajoute le lien dans `src/data/navigation.ts` pour qu'il apparaisse dans le menu, et dans `src/app/sitemap.ts` pour Google.
 
 ### Server Components vs Client Components
 
@@ -207,30 +228,33 @@ export default function MonComposantInteractif() {
 }
 ```
 
-Les seuls composants `'use client'` du projet sont `Header.tsx` (menu mobile) et `ContactForm.tsx` (formulaire).
+Les seuls composants `'use client'` du projet sont `Header.tsx` (menu mobile), `ContactForm.tsx` (formulaire) et `BackButton.tsx`.
 
 ## SEO
 
 Le SEO est géré via le [Metadata API de Next.js](https://nextjs.org/docs/app/building-your-application/optimizing/metadata).
 
-- Les métadonnées globales (Open Graph, Twitter Card, JSON-LD) sont dans `src/app/layout.tsx`
-- Chaque page définit son propre `title` et `description` via `export const metadata`
-- Le sitemap est généré automatiquement depuis `src/app/sitemap.ts`
-- Le `robots.txt` est généré depuis `src/app/robots.ts`
-
-Pour ajouter une page au sitemap, ajoute une entrée dans `src/app/sitemap.ts`.
+- Les infos centrales (URL, email, adresse, réseaux) sont dans `src/lib/site.ts`
+- Chaque page appelle `pageMetadata()` : titre, description, URL canonique et Open Graph
+- Image de partage : `public/images/og-inter-asso.png` (1200×630)
+- Données structurées JSON-LD : association et clubs (`layout.tsx`), fil d'Ariane (`PageHeader.tsx`), événements datés (`evenements/page.tsx`)
+- Le sitemap est généré depuis `src/app/sitemap.ts`, le `robots.txt` depuis `src/app/robots.ts`
 
 ## Charte graphique
 
-Le site utilise un dégradé violet → rose → orange comme couleur principale.
+Les couleurs viennent du logo de l'Inter-Asso (le macareux noir et blanc et ses pastilles de couleur) et du granit rose de la côte de Lannion. Elles sont définies dans `src/app/globals.css` et utilisables comme classes Tailwind (`bg-granit`, `text-magenta`…).
 
-| Rôle | Valeur Tailwind | Hex |
+| Rôle | Classe Tailwind | Hex |
 |---|---|---|
-| Violet | `purple-600` | `#7c3aed` |
-| Rose | `pink-500` | `#ec4899` |
-| Orange | `orange-400` | `#fb923c` |
+| Encre (texte, boutons) | `ink` | `#000000` |
+| Fond | `paper` | `#ffffff` |
+| Fond secondaire | `granit` | `#f1ddd6` |
+| Texte secondaire | `muted` | `#514946` |
+| Pastilles des clubs | `magenta`, `orange`, `bleu`, `lime`, `jaune`, `nuit` | `#a3238a`, `#ff9f00`, `#0ba6ea`, `#cedd48`, `#ffe500`, `#22133f` |
 
-Le héro de chaque page utilise le composant `PageHero` avec le dégradé `from-purple-600 via-pink-500 to-orange-400`.
+Typographie : **Archivo** (Google Fonts), une seule famille. Les titres utilisent la classe `display` (Archivo étroit, gras, en capitales, comme le lettrage du logo). La classe `narrow` donne la version étroite sans capitales.
+
+Chaque club a sa pastille de couleur : on la retrouve dans les listes, autour de son logo et dans le pied de page.
 
 ## Contribuer
 

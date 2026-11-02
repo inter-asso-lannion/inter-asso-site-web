@@ -1,68 +1,92 @@
 import Link from "next/link";
+import { clubs } from "@/data/clubs";
+import { evenements } from "@/data/evenements";
+
+// Trois affiches récentes, posées en éventail (position finale : décalage x/y + rotation)
+const POSTERS = [
+  { id: "up-ta-rentree-2025", x: "-34%", y: "6%", r: "-9deg" },
+  { id: "halloween-party-2025", x: "30%", y: "3%", r: "7deg" },
+  { id: "up-ton-noel-2025", x: "0%", y: "-4%", r: "-1.5deg" },
+];
 
 export default function Hero() {
+  const posters = POSTERS.map((p) => ({
+    ...p,
+    event: evenements.find((e) => e.id === p.id)!,
+  }));
+
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-purple-600 via-pink-500 to-orange-400 text-white py-24 md:py-36">
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-      <div className="absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-10 flex justify-center">
-            <img
-              src="/images/clubs/Logo-Inter-Asso.webp"
-              alt="Logo Inter-Asso IUT Lannion"
-              className="h-28 w-28 md:h-36 md:w-36 drop-shadow-xl"
-            />
-          </div>
-
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
-            L&apos;Inter-Asso de l&apos;IUT de Lannion
+    <section className="overflow-hidden border-b-2 border-ink">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-12 pb-16 md:grid-cols-[1.15fr_1fr] md:px-6 md:pt-20 md:pb-24">
+        <div>
+          <h1 className="display">
+            <span className="block whitespace-nowrap text-[clamp(3.5rem,13vw,9.5rem)]">
+              L&apos;Inter-Asso
+            </span>
+            <span className="mt-2 block text-[clamp(2rem,6vw,4.25rem)]">
+              de l&apos;IUT de Lannion
+            </span>
           </h1>
-
-          <p className="text-xl md:text-2xl mb-6 text-white/90 font-medium">
-            Le cœur de la vie étudiante
+          <p className="narrow mt-8 text-2xl font-bold md:text-3xl">Le cœur de la vie étudiante</p>
+          <p className="mt-3 max-w-xl text-lg md:text-xl">
+            Clubs, événements, partenariats et initiatives étudiantes : l&apos;Inter-Asso
+            rassemble, dynamise et fait vivre la communauté de l&apos;IUT de Lannion.
           </p>
 
-          <p className="text-lg md:text-xl mb-12 text-white/80 max-w-3xl mx-auto">
-            Clubs, événements, partenariats et initiatives étudiantes :
-            l&apos;Inter-Asso rassemble, dynamise et fait vivre la communauté de
-            l&apos;IUT de Lannion.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/clubs"
-              className="group inline-flex items-center justify-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold shadow-xl transition-all hover:scale-105 hover:bg-gray-100"
+              className="rounded-full bg-ink px-7 py-3.5 text-center font-semibold text-paper hover:bg-magenta"
             >
               Découvrir les clubs
-              <span className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
             </Link>
-
             <Link
               href="/evenements"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/80 px-8 py-4 font-semibold text-white transition-all hover:bg-white hover:text-purple-600"
+              className="rounded-full border-2 border-ink px-7 py-3 text-center font-semibold hover:bg-jaune"
             >
               Voir les événements
             </Link>
           </div>
-        </div>
-      </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
+          {/* Les six pastilles du logo : une par club */}
+          <ul className="mt-12 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold">
+            {clubs.map((club) => (
+              <li key={club.id}>
+                <Link
+                  href={`/clubs#${club.id}`}
+                  className="inline-flex items-center gap-2 underline-offset-4 hover:underline"
+                >
+                  <span
+                    className="h-3.5 w-3.5 rounded-full"
+                    style={{ backgroundColor: club.couleur }}
+                    aria-hidden="true"
+                  />
+                  {club.nom}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <Link
+          href="/evenements"
+          className="group relative mx-auto block aspect-4/5 w-full max-w-sm md:max-w-md"
+          aria-label="Voir toutes les soirées de l'Inter-Asso"
         >
-          <path
-            d="M0 96L80 90C160 84 320 72 480 70C640 68 800 76 960 82C1120 88 1280 92 1360 94L1440 96V120H0V96Z"
-            fill="white"
-          />
-        </svg>
+          {posters.map(({ id, x, y, r, event }, i) => (
+            <img
+              key={id}
+              src={event.image}
+              alt={`Affiche : ${event.titre}, ${event.date}`}
+              width={event.largeur}
+              height={event.hauteur}
+              fetchPriority={i === posters.length - 1 ? "high" : "low"}
+              decoding="async"
+              className="poster absolute inset-x-[15%] top-[6%] w-[70%] border-[6px] border-paper shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]"
+              style={{ "--x": x, "--y": y, "--r": r } as React.CSSProperties}
+            />
+          ))}
+        </Link>
       </div>
     </section>
   );

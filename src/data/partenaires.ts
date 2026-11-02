@@ -4,13 +4,18 @@ export type Partenaire = {
   categorie: string;
   adresse: string;
   description: string;
+  /** L'avantage en quelques mots, affiché en gros */
   reduction: string;
+  /** "carte" = sur présentation de la carte étudiante, "info" = partenaire de l'asso */
   typeReduction: "carte" | "info";
+  /** Attention : sur le serveur, les noms de fichiers sont sensibles aux majuscules */
   logo: string;
   horaires?: string;
   notes?: string;
   lien?: string;
   instagram?: string;
+  /** Affiché sur la page d'accueil */
+  accueil?: boolean;
 };
 
 export const partenaires: Partenaire[] = [
@@ -23,7 +28,8 @@ export const partenaires: Partenaire[] = [
       "Partenaire officiel de l'Inter-Asso, la BPGO propose des offres bancaires spéciales étudiants et nous soutient dans nos projets. Offres à l'ouverture de compte et avantages exclusifs comme des places de ski offertes.",
     reduction: "Offres étudiants",
     typeReduction: "info",
-    logo: "/images/partenaires/logo-bpgo.webp",
+    logo: "/images/partenaires/Logo-bpgo.webp",
+    accueil: true,
   },
   {
     id: 2,
@@ -35,7 +41,8 @@ export const partenaires: Partenaire[] = [
     reduction: "Tarifs réduits & Billard",
     typeReduction: "carte",
     horaires: "Mer-Sam : 17h-01h | Dim : 15h-22h",
-    logo: "/images/partenaires/logo-le-truc.webp",
+    logo: "/images/partenaires/Logo-Le-Truc.webp",
+    accueil: true,
   },
   {
     id: 3,
@@ -47,9 +54,10 @@ export const partenaires: Partenaire[] = [
     reduction: "Menu Étudiant 10€",
     typeReduction: "carte",
     horaires: "Ouvert 7j/7",
-    logo: "/images/partenaires/logo-rosa-louise.webp",
+    logo: "/images/partenaires/Logo-Rosa-Louise.webp",
     lien: "https://www.rosa-louise.fr",
     instagram: "@rosa_louise_lannion",
+    accueil: true,
   },
   {
     id: 4,
@@ -61,7 +69,7 @@ export const partenaires: Partenaire[] = [
     reduction: "Dessert Offert",
     typeReduction: "carte",
     horaires: "Lun-Sam : 08h-20h",
-    logo: "/images/partenaires/logo-marie-blachere.webp",
+    logo: "/images/partenaires/Logo-Marie-Blachere.webp",
   },
   {
     id: 5,
@@ -72,7 +80,8 @@ export const partenaires: Partenaire[] = [
       "Le spécialiste des bières et vins à Lannion. V and B nous accompagne et nous conseille pour l'organisation et la fourniture de boissons lors de nos grands événements.",
     reduction: "Partenaire Logistique",
     typeReduction: "info",
-    logo: "/images/partenaires/logo-vandb.webp",
+    logo: "/images/partenaires/Logo-VandB.webp",
+    accueil: true,
   },
   {
     id: 6,
@@ -84,7 +93,8 @@ export const partenaires: Partenaire[] = [
     reduction: "Tarifs Étudiants",
     typeReduction: "carte",
     horaires: "Tous les jours dès 17h30 (18h le Dim/Lun) jusqu'à 01h",
-    logo: "/images/partenaires/logo-le-diplomate.webp",
+    logo: "/images/partenaires/Logo-Le-Diplomate.webp",
+    accueil: true,
   },
   {
     id: 7,
@@ -99,12 +109,4 @@ export const partenaires: Partenaire[] = [
     notes: "Entrée strictement réservée aux personnes majeures (18+).",
     logo: "/images/partenaires/logo-mood-club.webp",
   },
-];
-
-export const partenairesAccueil = [
-  { nom: "BPGO", logo: "/images/partenaires/logo-bpgo.webp" },
-  { nom: "Rosa Louise", logo: "/images/partenaires/logo-rosa-louise.webp" },
-  { nom: "Le Truc", logo: "/images/partenaires/logo-le-truc.webp" },
-  { nom: "V and B", logo: "/images/partenaires/logo-vandb.webp" },
-  { nom: "Le Diplomate", logo: "/images/partenaires/logo-le-diplomate.webp" },
 ];

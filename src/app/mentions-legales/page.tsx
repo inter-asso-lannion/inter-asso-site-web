@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { DocumentTextIcon, BuildingOffice2Icon, ServerIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Mentions Légales",
+  alternates: { canonical: "/mentions-legales" },
   description:
     "Mentions légales du site inter-asso.fr — éditeur, hébergement, propriété intellectuelle et protection des données personnelles (RGPD).",
   robots: { index: false, follow: false },
@@ -11,54 +11,44 @@ export const metadata: Metadata = {
 
 export default function MentionsLegalesPage() {
   return (
-    <main className="py-16 md:py-24 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-              Mentions Légales
-            </h1>
-            <p className="text-lg text-gray-600">
-              Informations légales concernant le site inter-asso.fr
-            </p>
-          </div>
+    <>
+      <PageHeader
+        title="Mentions Légales"
+        path="/mentions-legales"
+        lead="Informations légales concernant le site inter-asso.fr"
+      />
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <div className="max-w-3xl">
 
-          <div className="space-y-8">
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <BuildingOffice2Icon className="h-6 w-6 text-purple-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Éditeur du site
-                </h2>
-              </div>
+          <div className="space-y-14">
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">Éditeur du site</h2>
 
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4">
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Dénomination
                   </p>
                   <p>INTER ASSO</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Forme juridique
                   </p>
                   <p>Association déclarée (loi 1901)</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     RNA (Répertoire National des Associations)
                   </p>
                   <p>W223000547</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">SIREN</p>
+                  <p className="text-muted">SIREN</p>
                   <p>513 748 145</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Siège social
                   </p>
                   <p>
@@ -70,19 +60,19 @@ export default function MentionsLegalesPage() {
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">Contact</p>
+                  <p className="text-muted">Contact</p>
                   <p>
                     Email :{" "}
                     <a
                       href="mailto:hello@inter-asso.fr"
-                      className="text-purple-600 hover:underline"
+                      className="font-semibold underline decoration-2 underline-offset-4"
                     >
                       hello@inter-asso.fr
                     </a>
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Directeur de la publication
                   </p>
                   <p>Le Président de l&apos;association en exercice</p>
@@ -90,23 +80,16 @@ export default function MentionsLegalesPage() {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <ServerIcon className="h-6 w-6 text-blue-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Hébergement
-                </h2>
-              </div>
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">Hébergement</h2>
 
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4">
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">Hébergeur</p>
+                  <p className="text-muted">Hébergeur</p>
                   <p>Infomaniak Network SA</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">Adresse</p>
+                  <p className="text-muted">Adresse</p>
                   <p>
                     Rue Eugène Marziano 25
                     <br />
@@ -116,13 +99,13 @@ export default function MentionsLegalesPage() {
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Registre du commerce
                   </p>
                   <p>CH-660.0.059.996-1 (Canton de Genève)</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1">
+                  <p className="text-muted">
                     Numéro IDE/TVA
                   </p>
                   <p>CHE-103.167.648</p>
@@ -130,17 +113,10 @@ export default function MentionsLegalesPage() {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <DocumentTextIcon className="h-6 w-6 text-green-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Propriété intellectuelle
-                </h2>
-              </div>
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">Propriété intellectuelle</h2>
 
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4">
                 <p>
                   Le contenu du site inter-asso.fr (textes, images, graphismes,
                   logo, icônes, etc.) est la propriété exclusive de
@@ -154,7 +130,7 @@ export default function MentionsLegalesPage() {
                     href="https://github.com/inter-asso-lannion/inter-asso-site-web"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-600 hover:underline"
+                    className="font-semibold underline decoration-2 underline-offset-4"
                   >
                     GitHub
                   </a>
@@ -169,18 +145,11 @@ export default function MentionsLegalesPage() {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-                  <ShieldCheckIcon className="h-6 w-6 text-indigo-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Protection des données personnelles
-                </h2>
-              </div>
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">Protection des données personnelles</h2>
 
-              <div className="space-y-4 text-gray-700">
-                <h3 className="font-semibold text-gray-900 text-lg">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold">
                   Collecte de données
                 </h3>
                 <p>
@@ -189,14 +158,14 @@ export default function MentionsLegalesPage() {
                   le traitement de votre demande.
                 </p>
 
-                <h3 className="font-semibold text-gray-900 text-lg mt-6">
+                <h3 className="text-xl font-semibold mt-6">
                   Vos droits
                 </h3>
                 <p>
                   Conformément au RGPD et à la loi Informatique et Libertés,
                   vous disposez des droits suivants :
                 </p>
-                <ul className="list-disc list-inside space-y-2 ml-4">
+                <ul className="list-disc space-y-2 pl-6">
                   <li>Droit d&apos;accès à vos données personnelles</li>
                   <li>Droit de rectification de vos données</li>
                   <li>Droit à l&apos;effacement de vos données</li>
@@ -209,13 +178,13 @@ export default function MentionsLegalesPage() {
                   Pour exercer ces droits :{" "}
                   <a
                     href="mailto:hello@inter-asso.fr"
-                    className="text-purple-600 hover:underline"
+                    className="font-semibold underline decoration-2 underline-offset-4"
                   >
                     hello@inter-asso.fr
                   </a>
                 </p>
 
-                <h3 className="font-semibold text-gray-900 text-lg mt-6">
+                <h3 className="text-xl font-semibold mt-6">
                   Cookies
                 </h3>
                 <p>
@@ -226,11 +195,11 @@ export default function MentionsLegalesPage() {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">
                 Limitation de responsabilité
               </h2>
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-4">
                 <p>
                   L&apos;Inter-Asso s&apos;efforce d&apos;assurer au mieux de
                   ses possibilités l&apos;exactitude et la mise à jour des
@@ -246,11 +215,11 @@ export default function MentionsLegalesPage() {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-8 shadow-md">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <section className="border-t-2 border-ink pt-8">
+              <h2 className="display mb-6 text-4xl">
                 Loi applicable
               </h2>
-              <p className="text-gray-700">
+              <p>
                 Les présentes mentions légales sont régies par la loi française.
                 En cas de litige et à défaut d&apos;accord amiable, le litige
                 sera porté devant les tribunaux français conformément aux règles
@@ -259,22 +228,13 @@ export default function MentionsLegalesPage() {
             </section>
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-sm text-gray-500">
+          <div className="mt-14">
+            <p className="text-sm text-muted">
               Dernière mise à jour : 24 décembre 2025
             </p>
           </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 bg-linear-to-r from-purple-600 to-pink-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-600 transition-all shadow-lg"
-            >
-              Retour à l&apos;accueil
-            </Link>
-          </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }

@@ -7,10 +7,10 @@ export default function BackButton() {
     <button
       type="button"
       onClick={() => window.history.back()}
-      className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 border-2 border-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all"
+      className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink px-7 py-3 font-semibold hover:bg-jaune"
     >
       <ArrowLeftIcon className="h-5 w-5" />
-      Retour
+      Page précédente
     </button>
   );
 }

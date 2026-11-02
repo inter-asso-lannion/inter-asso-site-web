@@ -1,82 +1,100 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { clubs } from "@/data/clubs";
+import { SITE, absoluteUrl } from "@/lib/site";
 
-const SITE_URL = "https://inter-asso.fr";
-const SITE_NAME = "Inter-Asso IUT Lannion";
-const SITE_DESCRIPTION =
-  "L'Inter-Asso rassemble les clubs étudiants de l'IUT de Lannion : BDE MMI, BDE MP, BDE INFO, BDE R&T, BPM et LocalDreamer. Découvrez nos événements, partenaires et activités.";
+// Archivo variable avec l'axe de largeur : étroit pour les titres, normal pour le texte
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+  variable: "--font-archivo",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(SITE.url),
   title: {
-    template: `%s - ${SITE_NAME}`,
-    default: SITE_NAME,
+    template: `%s - ${SITE.name}`,
+    default: SITE.name,
   },
-  description: SITE_DESCRIPTION,
+  description: SITE.description,
+  applicationName: SITE.name,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    siteName: SITE_NAME,
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: "/images/clubs/Logo-Inter-Asso.webp",
-        width: 400,
-        height: 400,
-        alt: `Logo ${SITE_NAME}`,
-      },
-    ],
+    siteName: SITE.name,
+    title: SITE.name,
+    description: SITE.description,
+    url: "/",
+    images: [SITE.ogImage],
   },
-  twitter: {
-    card: "summary",
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    images: ["/images/clubs/Logo-Inter-Asso.webp"],
-  },
+  twitter: { card: "summary_large_image", images: [SITE.ogImage.url] },
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.ico" },
 };
 
-const jsonLd = {
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+};
+
+const organisation = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Inter-Asso IUT de Lannion",
-  url: SITE_URL,
-  logo: `${SITE_URL}/images/clubs/Logo-Inter-Asso.webp`,
-  description: SITE_DESCRIPTION,
-  email: "hello@inter-asso.fr",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Rue Édouard Branly",
-    addressLocality: "Lannion",
-    postalCode: "22300",
-    addressCountry: "FR",
-  },
-  sameAs: [
-    "https://instagram.com/inter_asso",
-    "https://facebook.com/interasso22",
-    "https://discord.gg/BG62QR77pP",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organisation`,
+      name: SITE.legalName,
+      alternateName: "Inter-Asso",
+      url: SITE.url,
+      logo: absoluteUrl(SITE.logo),
+      description: SITE.description,
+      email: SITE.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE.address.street,
+        postalCode: SITE.address.postalCode,
+        addressLocality: SITE.address.city,
+        addressCountry: SITE.address.country,
+      },
+      sameAs: [SITE.social.instagram, SITE.social.facebook, SITE.social.discord],
+      subOrganization: clubs.map((club) => ({
+        "@type": "Organization",
+        name: club.nom,
+        description: club.description,
+        url: absoluteUrl(`/clubs#${club.id}`),
+        ...(club.reseaux.email && { email: club.reseaux.email }),
+        ...(club.reseaux.instagram && { sameAs: [club.reseaux.instagram] }),
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#site`,
+      url: SITE.url,
+      name: SITE.name,
+      inLanguage: "fr-FR",
+      publisher: { "@id": `${SITE.url}/#organisation` },
+    },
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className="bg-white text-gray-900">
-        {/* JSON-LD structuré pour les moteurs de recherche */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <html lang="fr" className={archivo.variable}>
+      <body>
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-full focus:bg-jaune focus:px-5 focus:py-3 focus:font-semibold"
+        >
+          Aller au contenu
+        </a>
+        <JsonLd data={organisation} />
         <Header />
-        {children}
+        <main id="contenu">{children}</main>
         <Footer />
       </body>
     </html>

@@ -1,15 +1,14 @@
 export type NavLink = { href: string; label: string };
 
 export const NAV_LINKS: NavLink[] = [
-  { href: "/", label: "Accueil" },
   { href: "/clubs", label: "Clubs" },
-  { href: "/partenaires", label: "Partenaires" },
   { href: "/evenements", label: "Événements" },
+  { href: "/partenaires", label: "Partenaires" },
 ];
 
 export const FOOTER_LINKS: NavLink[] = [
   { href: "/", label: "Accueil" },
-  { href: "/clubs", label: "Nos clubs" },
+  { href: "/clubs", label: "Clubs" },
   { href: "/evenements", label: "Événements" },
   { href: "/partenaires", label: "Partenaires" },
   { href: "/contact", label: "Contact" },

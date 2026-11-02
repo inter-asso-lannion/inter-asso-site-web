@@ -1,46 +1,23 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-const SITE_URL = "https://inter-asso.fr";
+// Les mentions légales sont en noindex : elles ne vont pas dans le sitemap.
+const PAGES: { path: string; changeFrequency: "weekly" | "monthly" | "yearly"; priority: number }[] = [
+  { path: "", changeFrequency: "weekly", priority: 1 },
+  { path: "/evenements", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/clubs", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/partenaires", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/contact", changeFrequency: "yearly", priority: 0.6 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${SITE_URL}/evenements`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/clubs`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/partenaires`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/mentions-legales`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
-  ];
+  const lastModified = new Date();
+  return PAGES.map(({ path, changeFrequency, priority }) => ({
+    url: `${SITE.url}${path}`,
+    lastModified,
+    changeFrequency,
+    priority,
+  }));
 }

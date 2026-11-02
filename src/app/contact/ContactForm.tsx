@@ -5,6 +5,12 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
+// Identifiant Formspree : configurable dans .env.local (voir README)
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "xpwvgpwe";
+
+const champClass =
+  "mt-2 w-full rounded-md border-2 border-ink/25 bg-paper px-4 py-3 text-base hover:border-ink/50 focus:border-ink focus:outline-none focus-visible:outline-3 focus-visible:outline-bleu";
+
 export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
 
@@ -13,19 +19,17 @@ export default function ContactForm() {
     setStatus("sending");
 
     const form = e.currentTarget;
-    const formData = new FormData(form);
 
     try {
-      const response = await fetch("https://formspree.io/f/xpwvgpwe", {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        body: formData,
+        body: new FormData(form),
         headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
         setStatus("success");
         form.reset();
-        setTimeout(() => setStatus("idle"), 8000);
       } else {
         setStatus("error");
       }
@@ -35,144 +39,87 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+    <section aria-labelledby="titre-formulaire" className="rounded-lg border-2 border-ink p-6 md:p-10">
+      <h2 id="titre-formulaire" className="display text-4xl">
         Envoie-nous un message
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="nom"
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Nom complet *
-          </label>
-          <input
-            type="text"
-            id="nom"
-            name="nom"
-            required
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
-            placeholder="Jean Dupont"
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="mt-8 grid gap-6 sm:grid-cols-2">
+        <label className="font-semibold">
+          Nom complet <span aria-hidden="true">*</span>
+          <input type="text" name="nom" required autoComplete="name" className={champClass} placeholder="Jean Dupont" />
+        </label>
 
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Email *
-          </label>
+        <label className="font-semibold">
+          Email <span aria-hidden="true">*</span>
           <input
             type="email"
-            id="email"
             name="_replyto"
             required
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
+            autoComplete="email"
+            className={champClass}
             placeholder="jean.dupont@exemple.fr"
           />
-        </div>
+        </label>
 
-        <div>
-          <label
-            htmlFor="telephone"
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Téléphone
-          </label>
-          <input
-            type="tel"
-            id="telephone"
-            name="telephone"
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
-            placeholder="06 12 34 56 78"
-          />
-        </div>
+        <label className="font-semibold">
+          Téléphone
+          <input type="tel" name="telephone" autoComplete="tel" className={champClass} placeholder="06 12 34 56 78" />
+        </label>
 
-        <div>
-          <label
-            htmlFor="sujet"
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Sujet *
-          </label>
-          <select
-            id="sujet"
-            name="_subject"
-            required
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
-          >
-            <option value="">Choisis un sujet</option>
-            <option value="[Contact] Demande d'information">
-              Demande d&apos;information
+        <label className="font-semibold">
+          Sujet <span aria-hidden="true">*</span>
+          <select name="_subject" required defaultValue="" className={champClass}>
+            <option value="" disabled>
+              Choisis un sujet
             </option>
-            <option value="[Contact] Rejoindre un club">
-              Rejoindre un club
-            </option>
-            <option value="[Contact] Devenir partenaire">
-              Devenir partenaire
-            </option>
-            <option value="[Contact] Question sur un événement">
-              Question sur un événement
-            </option>
+            <option value="[Contact] Demande d'information">Demande d&apos;information</option>
+            <option value="[Contact] Rejoindre un club">Rejoindre un club</option>
+            <option value="[Contact] Devenir partenaire">Devenir partenaire</option>
+            <option value="[Contact] Question sur un événement">Question sur un événement</option>
             <option value="[Contact] Autre">Autre</option>
           </select>
-        </div>
+        </label>
 
-        <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Message *
-          </label>
+        <label className="font-semibold sm:col-span-2">
+          Message <span aria-hidden="true">*</span>
           <textarea
-            id="message"
             name="message"
             required
             rows={6}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors resize-none"
+            className={`${champClass} resize-y`}
             placeholder="Écris ton message ici..."
           />
-        </div>
+        </label>
 
         <input type="hidden" name="_captcha" value="false" />
 
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="w-full bg-linear-to-r from-purple-600 to-pink-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-600 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-        >
-          <PaperAirplaneIcon className="h-5 w-5" />
-          <span>
+        <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted">* Champs obligatoires</p>
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-magenta disabled:cursor-wait disabled:opacity-60"
+          >
+            <PaperAirplaneIcon className="h-5 w-5" />
             {status === "sending" ? "Envoi en cours..." : "Envoyer le message"}
-          </span>
-        </button>
+          </button>
+        </div>
 
-        <p className="text-sm text-gray-500 text-center">
-          * Champs obligatoires
-        </p>
-
-        {status === "success" && (
-          <div className="bg-green-50 border-2 border-green-500 text-green-800 px-4 py-3 rounded-lg">
-            <p className="font-semibold">✓ Message envoyé avec succès !</p>
-            <p className="text-sm mt-1">
-              Nous te répondrons dans les plus brefs délais.
+        <div aria-live="polite" className="sm:col-span-2">
+          {status === "success" && (
+            <p className="rounded-md bg-lime px-4 py-3">
+              <strong>Message envoyé.</strong> Nous te répondrons dans les plus brefs délais.
             </p>
-          </div>
-        )}
-
-        {status === "error" && (
-          <div className="bg-red-50 border-2 border-red-500 text-red-800 px-4 py-3 rounded-lg">
-            <p className="font-semibold">Une erreur est survenue</p>
-            <p className="text-sm mt-1">
-              Réessaye plus tard ou contacte-nous directement par email.
+          )}
+          {status === "error" && (
+            <p className="rounded-md border-2 border-magenta px-4 py-3">
+              <strong>Le message n&apos;est pas parti.</strong> Réessaye plus tard ou écris-nous
+              directement à hello@inter-asso.fr.
             </p>
-          </div>
-        )}
+          )}
+        </div>
       </form>
-    </div>
+    </section>
   );
 }

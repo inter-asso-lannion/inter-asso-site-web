@@ -1,32 +1,31 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { HomeIcon } from "@heroicons/react/24/outline";
 import BackButton from "@/components/BackButton";
+
+export const metadata: Metadata = {
+  title: "Page introuvable",
+  robots: { index: false },
+};
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 py-16">
-      <div className="container mx-auto px-4">
-        <div className="max-w-lg mx-auto text-center">
-          <h1 className="text-9xl font-bold text-purple-600 mb-6">404</h1>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Page introuvable
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Désolé, la page que tu cherches n&apos;existe pas ou a été déplacée.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <BackButton />
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all"
-            >
-              <HomeIcon className="h-5 w-5" />
-              Accueil
-            </Link>
-          </div>
-        </div>
+    <section className="mx-auto max-w-6xl px-4 py-24 md:px-6 md:py-36">
+      <p className="display text-[clamp(7rem,25vw,16rem)] text-granit-deep" aria-hidden="true">
+        404
+      </p>
+      <h1 className="display mt-2 text-5xl md:text-7xl">Page introuvable</h1>
+      <p className="mt-6 max-w-xl text-lg">
+        Désolé, la page que tu cherches n&apos;existe pas ou a été déplacée.
+      </p>
+      <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Link
+          href="/"
+          className="rounded-full bg-ink px-7 py-3.5 text-center font-semibold text-paper hover:bg-magenta"
+        >
+          Retour à l&apos;accueil
+        </Link>
+        <BackButton />
       </div>
-    </main>
+    </section>
   );
 }

@@ -1,111 +1,130 @@
-import type { Metadata } from "next";
-import { CreditCardIcon, MapPinIcon, ClockIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowTopRightOnSquareIcon,
+  ClockIcon,
+  CreditCardIcon,
+  ExclamationCircleIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
+import { IconInstagram } from "@/components/icons";
 import { partenaires } from "@/data/partenaires";
-import PageHero from "@/components/PageHero";
+import PageHeader from "@/components/PageHeader";
+import { SITE, pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Nos Partenaires",
   description:
     "Profitez d'avantages exclusifs chez nos partenaires locaux à Lannion : réductions, menus étudiants et offres spéciales sur présentation de votre carte Inter-Asso.",
-};
+  path: "/partenaires",
+});
 
 export default function PartenairesPage() {
   return (
-    <main>
-      <PageHero title="Nos Partenaires" paddingY="py-16">
-        <div className="mt-6 inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30 shadow-lg">
-          <CreditCardIcon className="h-6 w-6" />
-          <span className="font-semibold">
-            Carte étudiante obligatoire pour bénéficier des avantages
-          </span>
-        </div>
-      </PageHero>
+    <>
+      <PageHeader title="Nos Partenaires" path="/partenaires">
+        <p className="mt-8 inline-flex items-center gap-3 rounded-full bg-paper px-5 py-3 font-semibold">
+          <CreditCardIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
+          Carte étudiante obligatoire pour bénéficier des avantages
+        </p>
+      </PageHeader>
 
-      <section className="container mx-auto px-4 mt-16 mb-20">
-        <div className="max-w-5xl mx-auto flex flex-col gap-10">
-          {partenaires.map((partenaire) => (
-            <article
-              key={partenaire.id}
-              className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row min-h-80 hover:scale-[1.01] transition-transform duration-300"
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <ul>
+          {partenaires.map((p) => (
+            <li
+              key={p.id}
+              id={`partenaire-${p.id}`}
+              className="grid gap-8 border-t-2 border-ink py-12 md:grid-cols-[13rem_1fr] md:gap-12"
             >
-              <div className="lg:w-1/3 bg-gray-50 flex items-center justify-center p-10 border-b lg:border-b-0 lg:border-r border-gray-100">
+              <div className="flex h-40 w-40 items-center justify-center rounded-lg border-2 border-granit-deep bg-paper p-4 md:h-52 md:w-52">
                 <img
-                  src={partenaire.logo}
-                  alt={`Logo ${partenaire.nom}`}
-                  className="w-full max-h-48 object-contain drop-shadow-sm"
+                  src={p.logo}
+                  alt={`Logo ${p.nom}`}
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full w-full object-contain"
                 />
               </div>
 
-              <div className="lg:w-2/3 p-8 md:p-12 flex flex-col">
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-4 py-1.5 bg-purple-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm">
-                    {partenaire.categorie}
-                  </span>
-                  <span className="px-4 py-1.5 bg-green-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm animate-pulse">
-                    {partenaire.reduction}
-                  </span>
-                </div>
-
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  {partenaire.nom}
-                </h2>
-
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  {partenaire.description}
+              <article>
+                <p className="text-muted">{p.categorie}</p>
+                <h2 className="display mt-1 text-5xl md:text-6xl">{p.nom}</h2>
+                <p className="narrow mt-4 inline-block bg-jaune px-3 py-1 text-2xl font-extrabold md:text-3xl">
+                  {p.reduction}
                 </p>
+                <p className="mt-5 max-w-2xl text-lg">{p.description}</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-auto pt-6 border-t border-gray-100 text-gray-700">
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <MapPinIcon className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
-                      <span className="font-medium text-sm">
-                        {partenaire.adresse}
-                      </span>
+                <dl className="mt-6 grid max-w-2xl gap-3 text-[0.95rem] sm:grid-cols-2">
+                  <div className="flex gap-2">
+                    <dt>
+                      <MapPinIcon className="h-5 w-5" />
+                      <span className="sr-only">Adresse</span>
+                    </dt>
+                    <dd>{p.adresse}</dd>
+                  </div>
+                  {p.horaires && (
+                    <div className="flex gap-2">
+                      <dt>
+                        <ClockIcon className="h-5 w-5" />
+                        <span className="sr-only">Horaires</span>
+                      </dt>
+                      <dd>{p.horaires}</dd>
                     </div>
-                    {partenaire.horaires && (
-                      <div className="flex items-start gap-3">
-                        <ClockIcon className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
-                        <span className="text-sm">{partenaire.horaires}</span>
-                      </div>
+                  )}
+                </dl>
+
+                {p.notes && (
+                  <p className="mt-5 flex max-w-2xl gap-2 font-semibold text-magenta">
+                    <ExclamationCircleIcon className="h-5 w-5 shrink-0 translate-y-0.5" />
+                    {p.notes}
+                  </p>
+                )}
+
+                {(p.lien || p.instagram) && (
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {p.lien && (
+                      <a
+                        href={p.lien}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-jaune"
+                      >
+                        Site web
+                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                      </a>
+                    )}
+                    {p.instagram && (
+                      <a
+                        href={`https://instagram.com/${p.instagram.replace(/^@/, "")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-jaune"
+                      >
+                        <IconInstagram className="h-4 w-4" />
+                        {p.instagram}
+                      </a>
                     )}
                   </div>
-
-                  <div className="space-y-3">
-                    {partenaire.notes && (
-                      <div className="flex items-start gap-3 text-red-600 font-bold bg-red-50 p-3 rounded-xl border border-red-100">
-                        <ExclamationCircleIcon className="h-5 w-5 shrink-0" />
-                        <span className="text-xs uppercase tracking-wide">
-                          {partenaire.notes}
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex flex-wrap gap-4 pt-2">
-                      {partenaire.instagram && (
-                        <span className="text-sm font-bold text-pink-600 flex items-center gap-1">
-                          📸{" "}
-                          <span className="hover:underline cursor-default">
-                            {partenaire.instagram}
-                          </span>
-                        </span>
-                      )}
-                      {partenaire.lien && (
-                        <a
-                          href={partenaire.lien}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition-colors"
-                        >
-                          🌐 <span>Site web</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
+                )}
+              </article>
+            </li>
           ))}
-        </div>
-      </section>
-    </main>
+        </ul>
+
+        <section className="mt-8 rounded-lg bg-granit p-8 md:p-12">
+          <h2 className="display text-4xl md:text-5xl">Comment devenir partenaire ?</h2>
+          <p className="mt-4 max-w-xl text-lg">
+            Envoie-nous un email à {SITE.email} en expliquant ton projet de partenariat.
+          </p>
+          <a
+            href={`mailto:${SITE.email}?subject=${encodeURIComponent("[Contact] Devenir partenaire")}`}
+            className="mt-6 inline-block rounded-full bg-ink px-6 py-3 font-semibold text-paper hover:bg-magenta"
+          >
+            Écrire à l&apos;Inter-Asso
+          </a>
+        </section>
+      </div>
+    </>
   );
 }

@@ -1,1 +1,102 @@
 @import "tailwindcss";
+
+/*
+ * Palette tirée du logo de l'Inter-Asso (macareux noir et blanc + pastilles de couleur)
+ * et du granit rose de la côte de Lannion.
+ */
+@theme {
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-granit: #f1ddd6;
+  --color-granit-deep: #e2bfb3;
+  --color-muted: #514946;
+
+  /* Pastilles du logo — une par club */
+  --color-bleu: #0ba6ea;
+  --color-lime: #cedd48;
+  --color-jaune: #ffe500;
+  --color-orange: #ff9f00;
+  --color-magenta: #a3238a;
+  --color-nuit: #22133f;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+p,
+dd {
+  text-wrap: pretty;
+}
+
+/* Titres façon affiche : Archivo étroit, gras, en capitales (comme le lettrage du badge) */
+@utility display {
+  font-stretch: 68%;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Texte étroit sans capitales, pour les offres et petits titres */
+@utility narrow {
+  font-stretch: 75%;
+}
+
+/* Focus clavier toujours visible */
+:focus-visible {
+  outline: 3px solid var(--color-bleu);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Les ancres ne passent pas sous l'en-tête collant */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Affiches de l'accueil : elles se déploient en éventail au chargement */
+@keyframes poster-fan {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(var(--x), var(--y)) rotate(var(--r));
+  }
+}
+
+.poster {
+  transform: translate(var(--x), var(--y)) rotate(var(--r));
+  animation: poster-fan 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .poster {
+    animation: none;
+  }
+}
+
+/* Masque le marqueur natif des <details> (FAQ) */
+summary::-webkit-details-marker {
+  display: none;
+}

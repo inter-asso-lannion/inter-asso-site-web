@@ -1,106 +1,89 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { EnvelopeIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { IconInstagram } from "@/components/icons";
 import { clubs } from "@/data/clubs";
-import PageHero from "@/components/PageHero";
+import ClubBadge from "@/components/ClubBadge";
+import PageHeader from "@/components/PageHeader";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Nos Clubs",
   description:
     "Découvrez les 6 clubs de l'Inter-Asso IUT de Lannion : BDE MMI, BDE MP, BDE INFO, BDE R&T, BPM et LocalDreamer. Rejoignez le club qui vous correspond !",
-};
+  path: "/clubs",
+});
 
 export default function ClubsPage() {
   return (
-    <main>
-      <PageHero
+    <>
+      <PageHeader
         title="Nos Clubs"
-        subtitle="Découvre les 6 clubs de l'Inter-Asso et rejoins celui qui te correspond !"
+        path="/clubs"
+        lead="Découvre les 6 clubs de l'Inter-Asso et rejoins celui qui te correspond !"
       />
 
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {clubs.map((club) => {
-                const Icon = club.icon;
-                return (
-                  <article
-                    key={club.id}
-                    id={club.id}
-                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
-                  >
-                    <div
-                      className={`relative h-48 bg-linear-to-br ${club.couleur} flex flex-col items-center justify-center p-6`}
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <ol className="space-y-0">
+          {clubs.map((club) => (
+            <li
+              key={club.id}
+              id={club.id}
+              className="grid gap-8 border-t-2 border-ink py-12 md:grid-cols-[13rem_1fr] md:gap-12"
+            >
+              <ClubBadge club={club} size="lg" />
+
+              <article>
+                <h2 className="display text-5xl md:text-6xl">{club.nom}</h2>
+                <p className="mt-3 inline-flex items-center gap-2 font-semibold">
+                  <span
+                    className="h-3 w-3 rounded-full"
+                    style={{ backgroundColor: club.couleur }}
+                    aria-hidden="true"
+                  />
+                  {club.departement}
+                </p>
+                <p className="mt-5 max-w-2xl text-lg">{club.description}</p>
+
+                <div className="mt-7 flex flex-wrap gap-3">
+                  {club.reseaux.instagram && (
+                    <a
+                      href={club.reseaux.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 font-semibold text-paper hover:bg-magenta"
                     >
-                      <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Icon className="h-10 w-10 text-white" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-white text-center">
-                        {club.nom}
-                      </h2>
-                    </div>
+                      <IconInstagram className="h-5 w-5" />
+                      Instagram<span className="sr-only"> de {club.nom}</span>
+                    </a>
+                  )}
+                  {club.reseaux.email && (
+                    <a
+                      href={`mailto:${club.reseaux.email}`}
+                      className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-5 py-2 font-semibold hover:bg-jaune"
+                    >
+                      <EnvelopeIcon className="h-5 w-5" />
+                      {club.reseaux.email}
+                    </a>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
 
-                    <div className="p-6">
-                      <div
-                        className={`inline-block px-3 py-1 bg-linear-to-r ${club.couleur} text-white text-xs font-semibold rounded-full mb-4`}
-                      >
-                        {club.departement}
-                      </div>
-                      <p className="text-gray-600 text-sm mb-6 leading-relaxed">
-                        {club.description}
-                      </p>
-
-                      <div className="space-y-2">
-                        {club.reseaux.instagram && (
-                          <a
-                            href={club.reseaux.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all font-medium"
-                            aria-label={`Instagram ${club.nom}`}
-                          >
-                            <IconInstagram className="h-4 w-4" />
-                            <span>Instagram</span>
-                          </a>
-                        )}
-                        {club.reseaux.email && (
-                          <a
-                            href={`mailto:${club.reseaux.email}`}
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors font-medium"
-                            aria-label={`Email ${club.nom}`}
-                          >
-                            <EnvelopeIcon className="h-4 w-4" />
-                            <span>Email</span>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="mt-16 text-center bg-linear-to-r from-purple-600 to-pink-500 rounded-2xl p-8 md:p-12 text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Envie de rejoindre un club ?
-              </h2>
-              <p className="text-lg md:text-xl mb-8 text-white/90">
-                Contacte directement le club qui t&apos;intéresse via Instagram
-                ou par email !
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Nous contacter
-                <ArrowTopRightOnSquareIcon className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        <section className="mt-8 rounded-lg bg-granit p-8 md:p-12">
+          <h2 className="display text-4xl md:text-5xl">Envie de rejoindre un club ?</h2>
+          <p className="mt-4 max-w-xl text-lg">
+            Contacte directement le club qui t&apos;intéresse via Instagram ou par email !
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-block rounded-full bg-ink px-6 py-3 font-semibold text-paper hover:bg-magenta"
+          >
+            Nous contacter
+          </Link>
+        </section>
+      </div>
+    </>
   );
 }

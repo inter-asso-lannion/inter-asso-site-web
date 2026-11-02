@@ -1,37 +1,35 @@
-import { PaintBrushIcon, BeakerIcon, CodeBracketIcon, WifiIcon, MusicalNoteIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline";
-import type { ComponentType, SVGProps } from "react";
-
-export type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>;
-
-export type ClubDetail = {
+export type Club = {
+  /** Identifiant unique, utilisé comme ancre : /clubs#bde-mmi */
   id: string;
   nom: string;
+  /** Nom court affiché dans les pastilles quand il n'y a pas de logo */
+  sigle: string;
   departement: string;
   description: string;
-  icon: HeroIcon;
+  /** Couleur de la pastille du club (reprise des pastilles du logo Inter-Asso) */
   couleur: string;
+  /** Couleur du texte posé sur la couleur du club, pour garder un bon contraste */
+  texteSurCouleur: "#000000" | "#ffffff";
+  /** Logo dans public/images/clubs/ — optionnel */
+  logo?: string;
+  /** "cover" remplit le rond, "contain" garde le logo entier (logos rectangulaires) */
+  logoFit?: "cover" | "contain";
   reseaux: {
     instagram?: string;
     email?: string;
   };
 };
 
-export type ClubAccueil = {
-  nom: string;
-  description: string;
-  icon: HeroIcon;
-  couleur: string;
-};
-
-export const clubs: ClubDetail[] = [
+export const clubs: Club[] = [
   {
     id: "bde-mmi",
     nom: "BDE MMI",
+    sigle: "MMI",
     departement: "Métiers du Multimédia et de l'Internet",
     description:
       "Le BDE MMI organise des événements pour les étudiants en MMI : soirées, sorties, projets créatifs et bien plus encore. Rejoins-nous pour vivre une expérience étudiante inoubliable !",
-    icon: PaintBrushIcon,
-    couleur: "from-purple-500 to-pink-500",
+    couleur: "#a3238a",
+    texteSurCouleur: "#ffffff",
     reseaux: {
       instagram: "https://instagram.com/bde.mmi.lannion",
       email: "bdemmi@inter-asso.fr",
@@ -40,11 +38,13 @@ export const clubs: ClubDetail[] = [
   {
     id: "bde-mp",
     nom: "BDE MP",
+    sigle: "MP",
     departement: "Mesures Physiques",
     description:
       "Le BDE MP représente les étudiants du département Mesures Physiques. Expériences scientifiques, soirées et cohésion d'équipe sont au programme !",
-    icon: BeakerIcon,
-    couleur: "from-blue-500 to-cyan-500",
+    couleur: "#ff9f00",
+    texteSurCouleur: "#000000",
+    logo: "/images/clubs/Logo-BDE-Mpintes.webp",
     reseaux: {
       instagram: "https://instagram.com/bde.mpintes",
       email: "bdemp@inter-asso.fr",
@@ -53,11 +53,13 @@ export const clubs: ClubDetail[] = [
   {
     id: "bde-info",
     nom: "BDE INFO",
+    sigle: "INFO",
     departement: "Informatique",
     description:
       "Le BDE INFO rassemble les passionnés de code et de nouvelles technologies. Hackathons, LAN parties et événements tech pour tous les étudiants en informatique !",
-    icon: CodeBracketIcon,
-    couleur: "from-green-500 to-emerald-500",
+    couleur: "#0ba6ea",
+    texteSurCouleur: "#000000",
+    logo: "/images/clubs/Logo_Alive.webp",
     reseaux: {
       instagram: "https://instagram.com/alive_iut",
       email: "bdeinfo@inter-asso.fr",
@@ -66,11 +68,13 @@ export const clubs: ClubDetail[] = [
   {
     id: "bde-rt",
     nom: "BDE R&T",
+    sigle: "R&T",
     departement: "Réseaux & Télécommunications",
     description:
       "Le BDE R&T connecte les étudiants du département Réseaux et Télécommunications. Événements networking, ateliers techniques et moments conviviaux !",
-    icon: WifiIcon,
-    couleur: "from-orange-500 to-yellow-500",
+    couleur: "#cedd48",
+    texteSurCouleur: "#000000",
+    logo: "/images/clubs/Logo-BDE-Angel.webp",
     reseaux: {
       instagram: "https://instagram.com/bde_rt_lannion",
       email: "bdert@inter-asso.fr",
@@ -79,11 +83,13 @@ export const clubs: ClubDetail[] = [
   {
     id: "bpm",
     nom: "BPM",
+    sigle: "BPM",
     departement: "Club Musique",
     description:
       "Le BPM (Beats Per Minute) est le club musique de l'IUT ! Concerts, jam sessions, découverte d'artistes et soirées musicales. Que tu sois musicien ou simple mélomane, viens partager ta passion !",
-    icon: MusicalNoteIcon,
-    couleur: "from-red-500 to-pink-500",
+    couleur: "#ffe500",
+    texteSurCouleur: "#000000",
+    logo: "/images/clubs/Logo-BPM.webp",
     reseaux: {
       instagram: "https://instagram.com/bpm_asso",
       email: "bpm@inter-asso.fr",
@@ -92,47 +98,17 @@ export const clubs: ClubDetail[] = [
   {
     id: "localdreamer",
     nom: "LocalDreamer",
+    sigle: "LD",
     departement: "Club développement jeux vidéo",
     description:
       "LocalDreamer est le club de développement de jeux vidéo de l'IUT ! Rejoins la communauté gaming de Lannion !",
-    icon: PuzzlePieceIcon,
-    couleur: "from-teal-500 to-emerald-500",
+    couleur: "#22133f",
+    texteSurCouleur: "#ffffff",
+    logo: "/images/clubs/Logo-Local-Dreamer.webp",
+    logoFit: "contain",
     reseaux: {
       instagram: "https://instagram.com/localdreamer.lan",
       email: "localdreamer@inter-asso.fr",
     },
-  },
-];
-
-export const clubsAccueil: ClubAccueil[] = [
-  {
-    nom: "BDE MMI",
-    description: "Bureau Des Étudiants Multimédia et Internet",
-    icon: PaintBrushIcon,
-    couleur: "from-purple-400 to-pink-500",
-  },
-  {
-    nom: "BDE MP",
-    description: "Bureau Des Étudiants Mesures Physiques",
-    icon: BeakerIcon,
-    couleur: "from-blue-400 to-cyan-500",
-  },
-  {
-    nom: "BDE R&T",
-    description: "Bureau Des Étudiants Réseaux & Télécommunications",
-    icon: WifiIcon,
-    couleur: "from-orange-400 to-yellow-500",
-  },
-  {
-    nom: "BDE INFO",
-    description: "Bureau Des Étudiants Informatique",
-    icon: CodeBracketIcon,
-    couleur: "from-green-400 to-emerald-500",
-  },
-  {
-    nom: "BPM",
-    description: "Club musique",
-    icon: MusicalNoteIcon,
-    couleur: "from-red-400 to-pink-500",
   },
 ];
