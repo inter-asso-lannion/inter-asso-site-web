@@ -6,16 +6,16 @@ Cette version (V2) est une réécriture complète du site d'origine (Astro) en *
 
 ## Stack technique
 
-- **[Next.js 15](https://nextjs.org/)** (App Router, `output: "export"` — génération statique)
-- **[React 19](https://react.dev/)** — Server Components par défaut, `'use client'` uniquement pour les composants interactifs
-- **[Tailwind CSS v4](https://tailwindcss.com/)** — config CSS-first via `@import "tailwindcss"` dans `globals.css`
-- **[Lucide React](https://lucide.dev/)** — icônes UI
+- **[Next.js 16](https://nextjs.org/)** (App Router, Turbopack, `output: "export"` — génération statique)
+- **[React 19.3](https://react.dev/)** — Server Components par défaut, `'use client'` uniquement pour les composants interactifs
+- **[Tailwind CSS v4.3](https://tailwindcss.com/)** — config CSS-first via `@import "tailwindcss"` dans `globals.css`
+- **[Lucide React 1.x](https://lucide.dev/)** — icônes UI
 - **[Formspree](https://formspree.io/)** — gestion des soumissions du formulaire de contact
-- **TypeScript** — typage statique
+- **[TypeScript 7](https://www.typescriptlang.org/)** — typage statique
 
 ## Prérequis
 
-- **Node.js** v18 ou supérieur — [Télécharger](https://nodejs.org/)
+- **Node.js** v20.9 ou supérieur (v24 LTS recommandée) — [Télécharger](https://nodejs.org/)
 - **Git** — [Télécharger](https://git-scm.com/)
 
 ## Installation
